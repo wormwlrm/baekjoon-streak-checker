@@ -1,6 +1,7 @@
 import requests
 import yaml
 import bs4
+import sys
 from datetime import datetime
 
 user_id = ""
@@ -13,7 +14,7 @@ def get_user_id():
     if user_id:
         return user_id
 
-    with open("config.yaml") as file:
+    with open("config.yml") as file:
         config = yaml.load(file, Loader=yaml.BaseLoader)
         user_id = config["user_id"]
         return user_id
@@ -29,8 +30,7 @@ def get_timestamp(soup: bs4.BeautifulSoup):
             "#status-table > tbody > tr:nth-child(1) > td:last-child > a"
         ).attrs["data-timestamp"]
     except:
-        print("해당 사용자 존재하지 않음")
-        exit(1)
+        sys.exit("[ERROR]: 사용자가 존재하지 않음")
 
 
 def main():
@@ -48,10 +48,10 @@ def main():
 
     if last_problem_solved_date == today:
         print("오늘 문제 풀기 완료")
-        exit(0)
+        sys.exit(0)
     else:
         print("오늘 문제 아직 안 풀었음")
-        exit(1)
+        sys.exit("[ERROR]: 오늘 문제를 풀지 않음")
 
 
 if __name__ == "__main__":
