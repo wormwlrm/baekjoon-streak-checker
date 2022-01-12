@@ -2,7 +2,7 @@ name: checker-cron
 
 on:
   schedule:
-    # 매일 KST 23:50:00에 실행
+    # 매일 KST 23:50:00에 실행 (UTC+9)
 		# 한국 타임존을 고려하여 23시에서 9시간을 빼줌
     - cron: 50 14 * * *
   workflow_dispatch:
