@@ -18,7 +18,7 @@
     user_id: howlism
     ```
 
-1. [알림 설정](https://github.com/settings/notifications) 페이지에서 Github Action 알람을 활성화합니다.
+1. [알림 설정](https://github.com/settings/notifications#notifications-github-actions-settings) 페이지에서 Github Action 알람을 활성화합니다.
 
    ![알람](setting.png)
 
