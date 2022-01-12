@@ -20,8 +20,13 @@ def get_user_id():
         return user_id
 
 
-def get_formatted_timestamp(timestamp):
-    return datetime.fromtimestamp(timestamp).strftime("%Y-%m-%d")
+def get_formatted_timestamp(timestamp, am6=False):
+    if am6:
+        form = "%Y-%m-%d 06:00:00"
+    else:
+        form = "%Y-%m-%d %H:%M:%S"
+
+    return datetime.fromtimestamp(timestamp).strftime(form)
 
 
 def get_timestamp(soup: bs4.BeautifulSoup):
@@ -41,12 +46,15 @@ def main():
 
     raw = requests.get(status_page_url)
     soup = bs4.BeautifulSoup(raw.text, "html.parser")
-    last_problem_solved_time = get_timestamp(soup)
+    last_problem_solved_timestamp = get_timestamp(soup)
 
-    last_problem_solved_date = get_formatted_timestamp(int(last_problem_solved_time))
-    today = get_formatted_timestamp(int(datetime.now().timestamp()))
+    # YYYY-MM-DD hh:mm:ss
+    last_problem_solved_time = get_formatted_timestamp(
+        int(last_problem_solved_timestamp)
+    )
+    today = get_formatted_timestamp(int(datetime.now().timestamp()), am6=True)
 
-    if last_problem_solved_date == today:
+    if today <= last_problem_solved_time:
         print("오늘 문제 풀기 완료")
         sys.exit(0)
     else:
