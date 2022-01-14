@@ -49,9 +49,11 @@ def main():
     last_problem_solved_timestamp = get_timestamp(soup)
 
     # YYYY-MM-DD hh:mm:ss
+    # 9시간 더해줌
     last_problem_solved_time = get_formatted_timestamp(
-        int(last_problem_solved_timestamp)
+        int(last_problem_solved_timestamp) + 3600 * 9
     )
+
     today = get_formatted_timestamp(int(datetime.now().timestamp()), am6=True)
 
     print(last_problem_solved_time)
