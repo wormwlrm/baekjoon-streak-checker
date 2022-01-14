@@ -54,6 +54,9 @@ def main():
     )
     today = get_formatted_timestamp(int(datetime.now().timestamp()), am6=True)
 
+    print(last_problem_solved_time)
+    print(today)
+
     if today <= last_problem_solved_time:
         print("오늘 문제 풀기 완료")
         sys.exit(0)
