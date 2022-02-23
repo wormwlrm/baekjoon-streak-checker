@@ -44,7 +44,13 @@ def main():
         f"https://www.acmicpc.net/status?user_id={user_id}&result_id={success_status}"
     )
 
-    raw = requests.get(status_page_url)
+    raw = requests.get(
+        status_page_url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+        },
+    )
+
     soup = bs4.BeautifulSoup(raw.text, "html.parser")
     last_problem_solved_timestamp = get_timestamp(soup)
 
